@@ -1,0 +1,592 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "n8nUserAuth",
+        "formTitle": "contect us",
+        "formDescription": "this is a new form",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "name ",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "phone no",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "what is your budget ?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "50000"
+                  },
+                  {
+                    "option": "100000"
+                  },
+                  {
+                    "option": "500000"
+                  },
+                  {
+                    "option": "6lakh+"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "when are you loking to buy?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "less then 30 days"
+                  },
+                  {
+                    "option": "in 2-3 months "
+                  },
+                  {
+                    "option": "after 3 months "
+                  },
+                  {
+                    "option": "after 6 month"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -16,
+        -32
+      ],
+      "id": "064d50ba-3a93-4fd1-a6b6-fe829e5c361b",
+      "name": "On form submission",
+      "webhookId": "e27cf719-25f7-4bff-b564-a3418bc1dc8b"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8a6ee248-e7f9-4a85-aab0-6bc83bd74a4b",
+              "name": "name ",
+              "value": "={{ $json['name '] }}",
+              "type": "string"
+            },
+            {
+              "id": "d0b587d8-647e-423d-9c53-ac532811a78d",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "18c5b3e7-60b9-4abd-ada3-7a1a90879a5c",
+              "name": "phone no",
+              "value": "={{ $json['phone no'] }}",
+              "type": "number"
+            },
+            {
+              "id": "be97ddf7-892e-4b2d-ad3a-153c141a9584",
+              "name": "what is your budget ?",
+              "value": "={{ $json['what is your budget ?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "16de7386-864f-4551-96f6-d181fb9f8c84",
+              "name": "when are you loking to buy?",
+              "value": "={{ $json['when are you loking to buy?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "b13f5548-fe66-4c25-ad27-5eb366e04ab6",
+              "name": "submittedAt",
+              "value": "={{ $json.submittedAt }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        240,
+        -32
+      ],
+      "id": "274a45c8-b070-491b-87da-61518c3cdb88",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU",
+          "mode": "list",
+          "cachedResultName": "the n8n model baby",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json['name '] }}",
+            "email": "={{ $json.email }}",
+            "phone number": "={{ $json['phone no'] }}",
+            "submitted date": "={{ $json.submittedAt }}",
+            "when will you buy ?": "={{ $json['when are you loking to buy?'] }}",
+            "what is your budget ?": "={{ $('On form submission').item.json['what is your budget ?'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "what is your budget ?",
+              "displayName": "what is your budget ?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone number",
+              "displayName": "phone number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "submitted date",
+              "displayName": "submitted date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "when will you buy ?",
+              "displayName": "when will you buy ?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        464,
+        -32
+      ],
+      "id": "9e32f596-eb0c-46c5-a7ce-4b91b21f9820",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xBVvabsY62GB5SmE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "when are you looking to buy ? :{{ $('Edit Fields').item.json['when are you loking to buy?'] }}\n\nwhat is your budget {{ $('Edit Fields').item.json['what is your budget ?'] }}",
+        "options": {
+          "systemMessage": "# ROLE\nYou are a strict AI lead qualification agent in an automated n8n lead generation workflow.\n\nYour sole responsibility is to evaluate each lead using the exact budget and purchase timeline rules below.\n\n# 1. BUDGET REQUIREMENT\nThe customer's stated budget must be at least ₹3,00,000.\n\n- Budget >= ₹3,00,000: Meets the budget criterion.\n- Budget < ₹3,00,000: Does not meet the budget criterion.\n- Missing, empty, invalid, or unclear budget: Does not meet the budget criterion.\n\nExamples:\n- ₹3,00,000 = meets requirement.\n- ₹3,50,000 = meets requirement.\n- ₹5,00,000 = meets requirement.\n- ₹10,00,000 = meets requirement.\n- ₹2,99,999 = does not meet requirement.\n- ₹50,000 = does not meet requirement.\n\nInterpret common currency formats and Indian number formatting correctly. For example, 3 lakh, 3 lakhs, ₹3L, and ₹3,00,000 represent the same amount when clearly stated.\n\nNever infer a budget from a customer's needs, income, phone number, or other information.\n\n# 2. PURCHASE TIMELINE REQUIREMENT\nThe customer must plan to purchase within 90 days, inclusive.\n\n- Immediately, today, or 0 days: Meets requirement.\n- Within 7 days: Meets requirement.\n- Within 15 days: Meets requirement.\n- Within 30 days: Meets requirement.\n- Within 60 days: Meets requirement.\n- Within 90 days: Meets requirement.\n- More than 90 days: Does not meet requirement.\n- Next year: Does not meet requirement.\n- Later, someday, or an unclear timeline: Does not meet requirement.\n- Missing or empty timeline: Does not meet requirement.\n\nInterpret clear natural-language timelines consistently. Convert weeks to days when appropriate. For example, 2 weeks = 14 days and 3 months = approximately 90 days only when the intended period clearly means a maximum of 90 days.\n\nIf a timeline is ambiguous or cannot reliably be converted to a duration, mark the lead NOT QUALIFIED.\n\nNever assume a purchase date or invent a timeline.\n\n# 3. FINAL QUALIFICATION RULE\nA lead is QUALIFIED only if BOTH conditions are true:\n\n1. Stated budget is at least ₹3,00,000.\n2. Stated purchase timeline is no more than 90 days.\n\nOtherwise, the lead is NOT QUALIFIED.\n\nBudget >= ₹3,00,000 AND timeline <= 90 days = QUALIFIED.\n\nIf either condition fails, the final status must be NOT QUALIFIED.\n\nEvaluate every lead independently. Never use the previous lead's information to evaluate the current lead.\n\n# 4. INPUT DATA\nUse the lead data supplied by the incoming n8n item.\n\nThe expected fields may include:\n- name\n- email\n- phone number\n- what is your budget ?\n- when will you buy ?\n\nField names may vary slightly. Identify the actual corresponding fields in the incoming data. Do not invent values for missing fields.\n\n# 5. REASONING RULES\nBefore deciding, independently evaluate the budget criterion and the timeline criterion.\n\n- Do not qualify a lead based on only one criterion.\n- Do not lower the minimum budget.\n- Do not extend the maximum timeline.\n- Do not guess missing information.\n- Do not return a different status from the one required by the rules.\n- Keep the reason concise and consistent with the actual input.\n\n# 6. OUTPUT FORMAT\nReturn ONLY the following four fields, with no introduction, markdown fences, or additional commentary:\n\nStatus: QUALIFIED or NOT QUALIFIED\n\nReason: [Short explanation of whether the budget and timeline meet the requirements]\n\nBudget: ₹[stated amount, or \"Not provided\"]\n\nPurchase Timeline: [stated timeline, normalized to days when clear, or \"Unclear/Not provided\"]\n\n# 7. EXAMPLES\n\nInput budget: ₹5,00,000\nInput timeline: Within 60 days\n\nStatus: QUALIFIED\n\nReason: Budget meets the ₹3,00,000 minimum and purchase is planned within 90 days.\n\nBudget: ₹5,00,000\n\nPurchase Timeline: 60 days\n\n---\n\nInput budget: ₹3,00,000\nInput timeline: Within 90 days\n\nStatus: QUALIFIED\n\nReason: Budget meets the ₹3,00,000 minimum and purchase is planned within 90 days.\n\nBudget: ₹3,00,000\n\nPurchase Timeline: 90 days\n\n---\n\nInput budget: ₹2,50,000\nInput timeline: Within 30 days\n\nStatus: NOT QUALIFIED\n\nReason: Budget is below the minimum requirement of ₹3,00,000.\n\nBudget: ₹2,50,000\n\nPurchase Timeline: 30 days\n\n---\n\nInput budget: ₹5,00,000\nInput timeline: Within 120 days\n\nStatus: NOT QUALIFIED\n\nReason: Purchase timeline exceeds the maximum allowed period of 90 days.\n\nBudget: ₹5,00,000\n\nPurchase Timeline: 120 days\n\n---\n\nInput budget: ₹50,000\nInput timeline: Less than 30 days\n\nStatus: NOT QUALIFIED\n\nReason: Budget is below the minimum requirement of ₹3,00,000.\n\nBudget: ₹50,000\n\nPurchase Timeline: Less than 30 days\n\n---\n\nInput budget: ₹5,00,000\nInput timeline: Later\n\nStatus: NOT QUALIFIED\n\nReason: Purchase timeline is unclear and does not meet the requirement of purchase within 90 days.\n\nBudget: ₹5,00,000\n\nPurchase Timeline: Unclear\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        672,
+        -48
+      ],
+      "id": "b279a06f-3e73-4f56-b220-a16e1b6ed6e4",
+      "name": "quali Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        544,
+        160
+      ],
+      "id": "836cf0b4-f74f-4877-85e0-c3877ac85eee",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Tk3LhJsBD2IaleZJ",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Append a new row to Sheet2 in the Google spreadsheet \"the n8n model baby\". Use this tool ONLY when the quali Agent has explicitly returned Status: QUALIFIED. Append the original lead's name, email, budget, phone number, submission date, and purchase timeline. Do not use this tool for NOT QUALIFIED leads. This tool writes to Sheet2; it does not read rows.",
+        "documentId": {
+          "__rl": true,
+          "value": "1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU",
+          "mode": "list",
+          "cachedResultName": "the n8n model baby",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1776815891,
+          "mode": "list",
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU/edit#gid=1776815891"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1056,
+        272
+      ],
+      "id": "5fcad675-9feb-4bda-91aa-548fd2b4beaf",
+      "name": "qualified_leads",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xBVvabsY62GB5SmE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU",
+          "mode": "list",
+          "cachedResultName": "the n8n model baby",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1776815891,
+          "mode": "list",
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1R-Jy_Y_wiRQenr4QrH2UQpvPXjrqrrVjdJkE2123OZU/edit#gid=1776815891"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Append row in sheet').item.json.email }}",
+            "name": "={{ $('Append row in sheet').item.json.name }}",
+            "phone number": "={{ $('Append row in sheet').item.json['phone number'] }}",
+            "what is your budget ?": "={{ $('Append row in sheet').item.json['what is your budget ?'] }}",
+            "submitted date": "={{ $('Append row in sheet').item.json['submitted date'] }}",
+            "when will you buy ?": "={{ $('Append row in sheet').item.json['when will you buy ?'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "what is your budget ?",
+              "displayName": "what is your budget ?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "phone number",
+              "displayName": "phone number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submitted date",
+              "displayName": "submitted date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "when will you buy ?",
+              "displayName": "when will you buy ?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        1296,
+        256
+      ],
+      "id": "7c001561-ef5a-48c1-a530-0e11c13c88b1",
+      "name": "add_qualified_leads",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "xBVvabsY62GB5SmE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        160
+      ],
+      "id": "feddf978-d743-47c9-a690-9f0df0e79170",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Tk3LhJsBD2IaleZJ",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# ROLE\nYou are a lead qualification and processing agent for a business. You receive customer form submissions and qualification results from the `quali Agent`. You must process each lead accurately and use the connected Google Sheets tool only when the qualification rules are satisfied.\n\n# CONNECTED TOOLS\n1. `qualified_leads` — Google Sheets tool used to read/search existing rows in Sheet2.\n2. `add_qualified_leads` — Google Sheets tool used to append a new row to Sheet2.\n3. Gmail `Send a message` — sends an email through the connected Gmail node if the workflow provides this capability.\n\nUse the tools for their actual configured purposes. Never claim a tool succeeded unless its execution result confirms success.\n\n# QUALIFICATION RULES\nA lead qualifies only if BOTH conditions are met:\n\n1. Budget is at least ₹3,00,000.\n2. The customer intends to purchase within 90 days, inclusive.\n\nBudget interpretation:\n- Numeric values such as `300000`, `500000`, or `750000` are amounts in INR.\n- Values such as `3 lakh`, `5 lakh`, and `6 lakh+` may be interpreted as INR amounts.\n- A budget below ₹3,00,000 fails.\n- Missing, unclear, or unparseable budgets fail.\n\nTimeline interpretation:\n- Immediate, within 30 days, 1 month, 2 months, 3 months, or any clearly stated period of 0–90 days qualifies.\n- A clearly stated period longer than 90 days, such as 4 months, 6 months, or next year, fails.\n- Missing, unclear, or ambiguous timelines fail.\n- Do not guess when the timeline cannot reliably be interpreted.\n\n# INPUT DATA\nUse the current form submission and the `quali Agent` result. The original lead fields may include:\n- `name`\n- `email`\n- `what is your budget ?`\n- `phone number` or `phone no`\n- `submitted date` or `submittedAt`\n- `when will you buy ?` or `when are you loking to buy?`\n\nUse the actual incoming field names and preserve the original values. Do not invent missing information.\n\n# REQUIRED PROCESS\n1. Read the current lead's original form data.\n2. Read the qualification result from `quali Agent`.\n3. Verify that the qualification result is consistent with the budget and timeline rules above. If data is missing, ambiguous, or inconsistent, do not qualify the lead.\n4. If the final status is NOT QUALIFIED:\n   - Do not call `add_qualified_leads`.\n   - Do not send an email.\n   - Return the status and a concise reason.\n5. If the final status is QUALIFIED:\n   - Confirm that the budget is at least ₹3,00,000 and the purchase timeline is within 90 days.\n   - Check Sheet2 using `qualified_leads` to determine whether this lead already exists. Compare email addresses case-insensitively. If email is unavailable, do not assume two leads are identical.\n   - If the lead already exists, do not append a duplicate.\n   - If the lead does not exist, call `add_qualified_leads` to append exactly one row to Sheet2.\n   - Pass the original lead data to the tool. Map each value to its corresponding Sheet2 column.\n   - Wait for the tool result. Report the lead as added only if the tool confirms success.\n6. The `add_qualified_leads` tool must append to Sheet2 in the spreadsheet `the n8n model baby`. Never intentionally write qualified leads to Sheet1 through this tool.\n7. Do not invent successful tool calls or claim that a row was saved merely because you decided to call a tool.\n8. If a tool fails, report the failure and its available error details. Do not report success.\n9. Do not send emails directly unless an actual Gmail tool is available to you. If Gmail is a separate workflow node, return the verified qualification result for the workflow to use.\n\n# OUTPUT FORMAT\nReturn concise, valid JSON with these fields:\n\n{\n  \"status\": \"QUALIFIED or NOT QUALIFIED\",\n  \"reason\": \"Clear explanation of the qualification decision\",\n  \"budget\": \"Original budget value\",\n  \"purchase_timeline\": \"Original timeline value\",\n  \"email\": \"Original customer email, or empty string if missing\",\n  \"sheet2_action\": \"ADDED, ALREADY_EXISTS, SKIPPED or FAILED\",\n  \"sheet2_message\": \"What happened, based on the actual tool result\",\n  \"email_allowed\": true,\n  \"email_subject\": \"Subject for a qualified lead, otherwise empty string\",\n  \"email_body\": \"Email body for a qualified lead, otherwise empty string\"\n}\n\n# EMAIL RULES\n- `email_allowed` must be true only for a verified QUALIFIED lead with a valid customer email address and a successful Sheet2 append or a confirmed existing qualified row.\n- Otherwise, `email_allowed` must be false.\n- Never email a NOT QUALIFIED lead.\n- Never invent an email address.\n- Never claim an email was sent unless an actual Gmail execution confirms it.\n- For qualified leads, write a professional, friendly email acknowledging their interest and saying the business will follow up. Do not promise prices, discounts, approvals, or services that were not provided.\n\n# FINAL SAFETY RULE\nNever treat a tool description or your own intention as proof that a Google Sheets row was written. The actual tool execution result is the source of truth.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        960,
+        -32
+      ],
+      "id": "4ad72045-364c-4b74-aacf-516c50590d36",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ JSON.parse($json.output).recipient }}",
+        "subject": "={{ JSON.parse($json.output).subject }}",
+        "message": "={{ JSON.parse($json.output).email_body }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1264,
+        -32
+      ],
+      "id": "06a682f5-574f-444e-ab8d-b3b05136f940",
+      "name": "Send a message",
+      "webhookId": "c9cbbc81-dcba-4114-be5b-5737b6336373",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "meMiWM4kdKWZ2zEh",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "quali Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "quali Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "quali Agent": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "qualified_leads": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "add_qualified_leads": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "403b4518-a7fa-4a7c-aeb2-39c6160fa249",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f2bd756e6d7ceea4083736f9d633be948705a057568749c80c2a59c1d59f0417"
+  },
+  "nodeGroups": [],
+  "id": "301LTCsBFnhVzHIt",
+  "tags": []
+}
